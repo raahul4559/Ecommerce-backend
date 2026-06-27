@@ -16,10 +16,14 @@
     "crypto": "^1.0.1",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "express-session": "^1.19.0",
     "jsonwebtoken": "^9.0.3",
     "mailgen": "^2.0.34",
     "mongoose": "^9.6.1",
+    "mongoose-aggregate-paginate-v2": "^1.1.4",
     "nodemailer": "^8.0.7",
-    "nodemon": "^3.1.14"
+    "nodemon": "^3.1.14",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0"
   }
 }
