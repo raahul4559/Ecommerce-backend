@@ -1,4 +1,3 @@
-
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import { User } from "../models/user.model.js";
@@ -27,8 +26,9 @@ passport.use(
             clientID: process.env.GOOGLE_CLIENT_ID,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
             callbackURL: process.env.GOOGLE_CALLBACK_URL,
+            userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo",
         },
-        async (_, __, profile, next) => {
+        async (accessToken, refreshToken, profile, next) => {
             try {
                 let user = await User.findOne({ email: profile._json.email });
 
