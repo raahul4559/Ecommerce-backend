@@ -183,6 +183,7 @@ const verifyEmail = asyncHandler(async (req, res) => {
     // if user isnot available token is expiry or invalid
     // token to undefined and save in db
     // response
+    
     const { verificationToken } = req.params
 
     if (!verificationToken) {
