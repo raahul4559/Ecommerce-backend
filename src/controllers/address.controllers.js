@@ -29,6 +29,26 @@ const createAddress = asyncHandler(async (req, res) => {
         .json(new ApiResponse(201, address, "Address Created Successfully"))
 })
 
+const getAllAddresses = asyncHandler(async (req, res) => {
+    //
+})
+
+const getAddressById = asyncHandler(async (req, res) => {
+    const {addressId} = req.params;
+    const address = await Address.findOne({
+        _id = addressId,
+        owner:req.user._id,
+    })
+
+    if(!address){
+        throw new AipError(400,"Address doesnot exist!")
+    }
+
+    return res
+    .status(200)
+    .json(new ApiResponse(200,address,"Address fetched successfully"))
+})
+
 const updateAddress = asyncHandler(async (req, res) => {
     const { addressId } = req.params;
     const { addressLine1, addressLine2, pincode, city, state, country } =
@@ -60,22 +80,20 @@ const updateAddress = asyncHandler(async (req, res) => {
 
 });
 
-const deleteAddress = asyncHandler(async (req, res) => {
-
-    const { addressId } = req.params;
-
+const deleteAddress = asyncHandler(async (req, res)=>{
+    const {addressId} = req.params
     const address = await Address.findOneAndDelete({
-        _id: addressId,
-        owner: req.user._id,
-    })
+        _id:addressId,
+        owner:req.user._id
+    });
 
-    if (!address) {
-        throw new ApiError(404, "Address doesnot exist.")
+    if(!address){
+        throw new ApiError(404,"Address not found")
     }
-
+    
     return res
-        .status(200)
-        .json(new ApiResponse(200, { deleteAddress: address }, "Address deleted successfully:"))
+    .status(200)
+    .json(new ApiResponse(200, {deleteAddress:address},"Address delected successfully!!"))
 })
 
 export {
