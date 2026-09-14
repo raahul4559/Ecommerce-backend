@@ -36,7 +36,7 @@ const getAllAddresses = asyncHandler(async (req, res) => {
 const getAddressById = asyncHandler(async (req, res) => {
     const {addressId} = req.params;
     const address = await Address.findOne({
-        _id = addressId,
+        _id : addressId,
         owner:req.user._id,
     })
 
